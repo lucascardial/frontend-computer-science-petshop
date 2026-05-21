@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="js/index.js"></script>
+</head>
+<body>
+    <h1>Ola, mundo!</h1>
+
+    <button onclick="cadastraUsuario(event)">Cadastrar</button>
+    <script>
+        function cadastraUsuario(event) {
+            event.preventDefault();
+
+            Repositories.User.salvarUsuario(new Models.User({
+                name: 'test',
+                id: '123',
+                email: 'user@mail.com',
+                password: 'password',
+            }))
+        }
+    </script>
+</body>
+</html>
