@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="js/index.js"></script>
     <style>
         table, th, td {
@@ -13,9 +14,11 @@
 </head>
 <body>
     <form id="cadastro-usuario-form">
-        <input type="text" name="name" placeholder="Nome Completo"/>
-        <input type="email" name="email" placeholder="E-mail"/>
-        <input type="password" name="password" placeholder="Senha"/>
+        <input type="text" name="name" placeholder="Nome Completo"/> <br><br>
+        <input type="email" name="email" placeholder="E-mail"/> <br><br>
+        <input type="password" name="password" placeholder="Senha"/> <br><br>
+        <input type="text" name="cpf" placeholder="CPF"/> <br><br>
+        <input type="text" name="phone" placeholder="Telefone"/> <br><br>
 
         <input type="submit" value="Cadastrar"/>
     </form>
@@ -30,11 +33,15 @@
             const userName = form.name.value;
             const userEmail = form.email.value;
             const password = form.password.value;
+            const cpf = form.cpf.value;
+            const phoneNumber = form.phone.value;
 
             Repositories.User.salvarUsuario(new Models.User({
                 name: userName,
                 email: userEmail,
                 password: password,
+                cpf: cpf,
+                phoneNumber: phoneNumber,
             }))
 
             listarUsuarios();
@@ -46,37 +53,42 @@
         }
 
         function listarUsuarios() {
-            const usuarios = Repositories.User.listarUsuarios()
-            let html = `<h3>Sem usuários cadastrados</h1>`;
+            const usuarios = Repositories.User.listarUsuarios();
+
+            let doceDeCoco = `<h3>Sem usuários cadastrados</h1>`;
 
             if(usuarios.length > 0){
-                html = `
+                doceDeCoco = `
                 <table id="lista-usuarios">
                     <thead>
                         <tr>
                         <th>Id</th>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
                         <th>Ação</th>
                         </tr>
                    </thead>`
 
                 for (let usuario of usuarios) {
-                    html += `
+                    doceDeCoco += `
                        <tr>
                         <td>${usuario.id}</td>
                         <td>${usuario.name}</td>
                         <td>${usuario.email}</td>
+                        <td>${usuario.cpf}</td>
+                        <td>${usuario.phoneNumber}</td>
                         <td><button onclick="deletaUsuario('${usuario.id}')">Excluir</button></td>
                     </tr>`
                 }
 
-                html += `</table>`
+                doceDeCoco += `</table>`
             }
 
 
 
-            document.getElementById('lista-usuarios').innerHTML = html
+            document.getElementById('lista-usuarios').innerHTML = doceDeCoco
         }
 
         window.onload = function() {

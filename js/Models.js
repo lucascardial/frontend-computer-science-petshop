@@ -8,6 +8,12 @@ import { Helpers} from "./helpers.js";
         /** @property {string} name*/
         name;
 
+        /** @property {string} name*/
+        cpf;
+
+        /** @property {string} name*/
+        phoneNumber;
+
         /** @property {string} email **/
         email;
 
@@ -17,12 +23,18 @@ import { Helpers} from "./helpers.js";
         constructor(data) {
             this.name = data.name;
             this.email = data.email;
+            this.cpf = data.cpf;
+            this.phoneNumber = data.phoneNumber;
             this.password = data.password;
 
             this.id = crypto.randomUUID()
 
             if(! Helpers.isStringValida(data.password)) {
-                alert('A senha deve conter no mínimo 4 dígitos!')
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: 'A senha deve conter no mínimo 4 dígitos!',
+                });
                 throw new Error('Password is required');
             }
         }

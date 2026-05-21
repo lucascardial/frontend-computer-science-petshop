@@ -20,7 +20,11 @@
    function salvarUsuario(usuario) {
         const emailEmUso = buscarPorEmail(usuario.email);
         if(emailEmUso !== null) {
-            alert('Não é possível cadastrar o usuário. Motivo: E-mail em uso!');
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Este e-mail já está em uso!",
+            });
             return;
         }
 
