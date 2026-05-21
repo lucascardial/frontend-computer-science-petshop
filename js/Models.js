@@ -1,3 +1,5 @@
+import { Helpers} from "./helpers.js";
+
 (function () {
     class User {
         /** @property {string} id*/
@@ -13,10 +15,16 @@
         password;
 
         constructor(data) {
-            this.id = data.id;
             this.name = data.name;
             this.email = data.email;
             this.password = data.password;
+
+            this.id = crypto.randomUUID()
+
+            if(! Helpers.isStringValida(data.password)) {
+                alert('A senha deve conter no mínimo 4 dígitos!')
+                throw new Error('Password is required');
+            }
         }
     }
 

@@ -27,10 +27,27 @@
         return DB.store(localStoragePrefix, usuario);
    }
 
+    /**
+     *
+     * @returns {Models.User[]}
+     */
+   function listarUsuarios() {
+        return DB.get(localStoragePrefix);
+   }
+
+   function deletarUsuario(id) {
+       const novaLista = listarUsuarios().filter((user) => user.id !== id) || []
+       localStorage.removeItem(localStoragePrefix);
+        console.log(novaLista);
+       localStorage.setItem(localStoragePrefix, JSON.stringify(novaLista));
+   }
+
    window.Repositories = {
         User: {
             buscarPorEmail,
-            salvarUsuario
+            salvarUsuario,
+            listarUsuarios,
+            deletarUsuario,
         }
    }
 })();
