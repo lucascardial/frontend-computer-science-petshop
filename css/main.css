@@ -1,5 +1,4 @@
-/* Importando uma fonte amigável e arredondada do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+
 
 * {
     margin: 0;
@@ -19,7 +18,7 @@ body {
     background-attachment: fixed;
 }
 
-.login-container {
+.container {
     background-color: #ffffff;
     width: 100%;
     max-width: 400px;
@@ -30,7 +29,7 @@ body {
     text-align: center;
 }
 
-.login-header h1 {
+.header h1 {
     color: #3a86ff;
     font-weight: 900;
     font-size: 2.8rem;
@@ -38,14 +37,14 @@ body {
     letter-spacing: -1px;
 }
 
-.login-header p {
+.header p {
     color: #023e8a; /* Azul marinho escuro para contraste e leitura */
     margin-bottom: 30px;
     font-size: 1.1rem;
     font-weight: 700;
 }
 
-.login-form {
+.form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -82,7 +81,7 @@ body {
     box-shadow: 0 0 0 4px rgba(58, 134, 255, 0.15); /* Sombra azul ao focar */
 }
 
-.btn-login {
+.btn {
     background-color: #3a86ff;
     color: white;
     border: none;
@@ -95,11 +94,11 @@ body {
     margin-top: 10px;
 }
 
-.btn-login:hover {
+.btn:hover {
     background-color: #00509d; /* Azul mais fechado ao passar o mouse */
 }
 
-.btn-login:active {
+.btn:active {
     transform: scale(0.97);
 }
 
