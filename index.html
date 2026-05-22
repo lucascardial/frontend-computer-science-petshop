@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script type="module" src="js/index.js"></script>
     <style>
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid black;
         }
     </style>
 </head>
+
 <body>
     <form id="cadastro-usuario-form">
-        <input type="text" name="name" placeholder="Nome Completo"/>
-        <input type="email" name="email" placeholder="E-mail"/>
-        <input type="password" name="password" placeholder="Senha"/>
+        <input type="text" name="name" placeholder="Nome Completo" />
+        <input type="email" name="email" placeholder="E-mail" />
+        <input type="password" name="password" placeholder="Senha" />
 
-        <input type="submit" value="Cadastrar"/>
+        <input type="submit" value="Cadastrar" />
     </form>
     <br />
     <br />
@@ -49,7 +53,7 @@
             const usuarios = Repositories.User.listarUsuarios()
             let html = `<h3>Sem usuários cadastrados</h1>`;
 
-            if(usuarios.length > 0){
+            if (usuarios.length > 0) {
                 html = `
                 <table id="lista-usuarios">
                     <thead>
@@ -63,7 +67,7 @@
 
                 for (let usuario of usuarios) {
                     html += `
-                       <tr>
+                     <tr>
                         <td>${usuario.id}</td>
                         <td>${usuario.name}</td>
                         <td>${usuario.email}</td>
@@ -79,11 +83,12 @@
             document.getElementById('lista-usuarios').innerHTML = html
         }
 
-        window.onload = function() {
+        window.onload = function () {
             listarUsuarios()
 
             document.querySelector('#cadastro-usuario-form').addEventListener('submit', cadastraUsuario)
         };
     </script>
 </body>
+
 </html>
