@@ -29,7 +29,7 @@ import { Helpers} from "./helpers.js";
 
             this.id = crypto.randomUUID()
 
-            if(! Helpers.isStringValida(data.password)) {
+            if(! Helpers.isStringValida(data.password) && data.password.length < 4) {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
