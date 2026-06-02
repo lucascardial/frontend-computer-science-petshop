@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../js/index.js">
+    </script>
     <script>
         function cadastroUsuario(event){
             event.preventDefault();
@@ -12,12 +15,20 @@
             const cpf = form.cpf.value;
             const telefone = form.telefone.value;
             const email = form.email.value;
-            const endereco = form.endereco.value;
+            const senha = form.senha.value;
             console.log(`nome do cliente: ${nome}`);
             console.log(`cpf do cliente: ${cpf}`);
             console.log(`telefone do cliente: ${telefone}`);
             console.log(`email do cliente: ${email}`);
-            console.log(`endereco do cliente: ${endereco}`);
+            console.log(`senha do cliente: ${senha}`);
+
+            Repositories.User.salvarUsuario(new Models.User({
+                name: nome,
+                email: email,
+                password: senha,
+                cpf: cpf,
+                phoneNumber: telefone,
+            }))
         }
     </script>
 </head>
@@ -35,8 +46,8 @@
 <input type="tel" name="telefone" required /><br /><br />
 <label>E-mail:</label><br />
 <input type="email" name="email" required /><br /><br />
-<label>Endereço:</label><br />
-<input type="text" name="endereco" required /><br /><br />
+<label>Senha:</label><br />
+<input type="text" name="senha" required /><br /><br />
 </section>
 
 <button type="submit">Cadastrar</button>
