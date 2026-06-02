@@ -29,7 +29,9 @@
     <script>
         function cadastraUsuario(event) {
             event.preventDefault();
+
             const form = event.target;
+
             const userName = form.name.value;
             const userEmail = form.email.value;
             const password = form.password.value;
@@ -91,10 +93,13 @@
             document.getElementById('lista-usuarios').innerHTML = doceDeCoco
         }
 
+
         window.onload = function() {
             listarUsuarios()
 
-            document.querySelector('#cadastro-usuario-form').addEventListener('submit', cadastraUsuario)
+            const form = document.querySelector('#cadastro-usuario-form');
+
+            form.addEventListener('submit', cadastraUsuario)
         };
     </script>
 </body>
