@@ -1,4 +1,4 @@
-import {Helpers} from "../helpers";
+import {Helpers} from "../helpers.js";
 
 export class User {
     /** @property {string} id*/

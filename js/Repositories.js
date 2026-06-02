@@ -1,4 +1,4 @@
-import {User} from './models/index'
+import {User} from './models/index.js'
 
 (function() {
     const localStoragePrefix = 'users';
