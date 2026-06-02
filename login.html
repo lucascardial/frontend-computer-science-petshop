@@ -1,58 +1,40 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Login</title> 
-    <script type="module" src="./js/index.js"></script>
-
-    
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="js/index.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
-
 <body>
-
-    <form onsubmit="fazerlogin(event)">
-<section id="loginForm">
-        <h2>Login</h2>
-
-        <div>
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-
-        <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <div id="errorMessage"></div>
-
-        <button type="submit">Entrar</button>
-</section>
+    <form id="login-usuario-form">
+        <input type="email" name="email" placeholder="E-mail"/> <br><br>
+        <input type="password" name="password" placeholder="Senha"/> <br><br>
+        <input type="submit" value="Login"/>
     </form>
-
-    <div id="fazerlogin"></div>
-
     <script>
-
-        function fazerlogin(event) {
+        function handleLogin(event) {
             event.preventDefault();
 
             const form = event.target;
-            const email = form.email.value;
-            const senha = form.senha.value;
 
-            console.log("Email digitado:", email);
-            console.log("Senha digitada:", senha);
+            const userEmail = form.email.value;
+            const password = form.password.value;
 
-            const user = Repository
+            const login = Repositories.User.login(userEmail, password);
 
+            alert( login ? 'Login Bem Sucedido!' : 'Email ou Senha inválido!');
         }
-        window.onload = function () {
-            document.querySelector('#loginForm').addEventListener('submit', fazerlogin);
-        };
+
+
+        document.querySelector('#login-usuario-form')
+            .addEventListener('submit', handleLogin);
     </script>
 </body>
-
 </html>

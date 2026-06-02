@@ -1,9 +1,11 @@
+import {User} from './models/index'
+
 (function() {
     const localStoragePrefix = 'users';
 
     /**
      * @param email
-     * @returns {Models.User | null}
+     * @returns {User | null}
      */
     function buscarPorEmail(email) {
         const users =  DB.get(localStoragePrefix);
@@ -14,7 +16,7 @@
 
         const user = users.find((user) => user.email === email);
 
-        return user ? new Models.User(user) : null;
+        return user ? new User(user) : null;
    }
 
    function salvarUsuario(usuario) {
@@ -33,7 +35,7 @@
 
     /**
      *
-     * @returns {Models.User[]}
+     * @returns {User[]}
      */
    function listarUsuarios() {
         return DB.get(localStoragePrefix);
@@ -46,12 +48,37 @@
        localStorage.setItem(localStoragePrefix, JSON.stringify(novaLista));
    }
 
+    /**
+     *
+     * @param {string} email
+     * @param {string} password
+     *
+     * @return bool
+     */
+   function login(email, password) {
+       const user = buscarPorEmail(email);
+
+       if(user === null) {
+           return false;
+       }
+
+       if(user.password !== password) {
+           return false;
+       }
+
+       DB.store('user_session', user)
+
+        return true;
+
+   }
+
    window.Repositories = {
         User: {
             buscarPorEmail,
             salvarUsuario,
             listarUsuarios,
             deletarUsuario,
+            login
         }
    }
 })();
