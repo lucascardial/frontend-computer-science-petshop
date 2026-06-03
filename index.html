@@ -26,7 +26,9 @@
     <br />
     <br />
     <div id="lista-usuarios"></div>
-    <script>
+    <script type="module">
+        import { User} from "./js/models/index.js";
+
         function cadastraUsuario(event) {
             event.preventDefault();
 
@@ -38,7 +40,7 @@
             const cpf = form.cpf.value;
             const phoneNumber = form.phone.value;
 
-            Repositories.User.salvarUsuario(new Models.User({
+            Repositories.User.salvarUsuario(new User({
                 name: userName,
                 email: userEmail,
                 password: password,
