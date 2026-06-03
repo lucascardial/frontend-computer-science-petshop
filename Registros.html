@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Página base</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        nav {
+            border-right: 1px solid black;
+            width: 300px;
+            height: calc(100vh - 40px);
+            padding: 20px;
+        }
+        main {
+            padding: 20px;
+        }
+        #content {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<div id="content">
+    <nav class="crumbs">
+        <ul>
+            <li class="crumb"><a href="#">Início</a></li>
+            <li class="crumb"><a href="#">Perfil</a></li>
+            <li class="crumb"><a href="#">Configurações</a></li>
+        </ul>
+    </nav>
+    <main>
+
+        <h1>Título Base</h1>
+        <!-- Tabela para lista de descrição -->
+        <table border="1" width="850px" height="350px">
+            <tr>
+                <td>
+                    <h3>Lista de descrição</h3>
+                </td>
+            </tr>
+        </table>
+        <!-- Botão para ABRIR o diálogo -->
+        <button popovertarget="exemplo-dialog">NOVO</button>
+        <dialog id="exemplo-dialog" popover>
+            <!-- Conteúdo de dentro do diálogo -->
+            <!-- Formulário para cadastro -->
+            <form onsubmit="exemploUm(event)">
+                <section id="cadastroUm">
+                    <h2>Cadastro...</h2>
+
+                    <label>Nome...:</label><br />
+                    <input type="text" name="nome" required /><br /><br />
+                    <label>Exemplo...:</label><br />
+                    <select name="ex...." required>
+                        <option value="">Selecione</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>Outro</option></select
+                    ><br /><br />
+
+                    <label>Conteúdo:</label><br />
+                    <input type="text" name="ex2..." required /><br /><br />
+
+                    <label>Conteúdo:</label><br />
+                    <input type="number" name="ex3" required /><br /><br />
+
+                    <label>Conteúdo:</label><br />
+                    <input type="text" name="ex4" required /><br /><br />
+
+                    <label>Conteúdo:</label><br />
+                    <input type="text" name="ex5" required /><br /><br />
+                </section>
+
+                <hr />
+                <!-- Botão de cadastro -->
+                <button type="submit">Cadastrar</button>
+            </form>
+            <!-- Botão para FECHAR o diálogo -->
+            <button popovertarget="exemplo-dialog" popovertargetaction="hide">Close</button>
+        </dialog>
+    </main>
+</div>
+
+</body>
+</html>
