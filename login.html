@@ -19,7 +19,7 @@
         <input type="submit" value="Login"/>
     </form>
     <script>
-        function handleLogin(event) {
+        function fazerLogin(event) {
             event.preventDefault();
 
             const form = event.target;
@@ -32,9 +32,10 @@
             alert( login ? 'Login Bem Sucedido!' : 'Email ou Senha inválido!');
         }
 
+        window.onload = function () {
+            document.querySelector('#login-usuario-form').addEventListener('submit', fazerLogin);
 
-        document.querySelector('#login-usuario-form')
-            .addEventListener('submit', handleLogin);
+        }
     </script>
 </body>
 </html>

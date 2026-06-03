@@ -22,7 +22,7 @@
             console.log(`email do cliente: ${email}`);
             console.log(`senha do cliente: ${senha}`);
 
-            Repositories.User.salvarUsuario(new Models.User({
+            Repositories.User.salvarUsuario(new User({
                 name: nome,
                 email: email,
                 password: senha,
