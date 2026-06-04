@@ -18,6 +18,10 @@ export class PetRepository {
         this.authService = authService;
     }
 
+    /**
+     *
+     * @return {Pet[]}
+     */
     list()
     {
         const user = this.authService.getAuthenticatedUser();
