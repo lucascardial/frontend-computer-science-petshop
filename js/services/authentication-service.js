@@ -52,7 +52,7 @@ export class AuthenticationService {
         const user = this.localStorageService.get('user_session')
         console.log(user)
 
-        if(! user.length) {
+        if(! user.id) {
             throw new Error('No user session found');
         }
 

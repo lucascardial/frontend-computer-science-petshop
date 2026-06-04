@@ -1,5 +1,5 @@
 export class LocalStorageService {
-    store(key, payload) {
+    save(key, payload) {
         payload.created_at =  new Date().toISOString()
         const items = this.get(key);
         items.push(payload);
@@ -29,6 +29,6 @@ export class LocalStorageService {
      */
     update(key, payload) {
         this.remove(key)
-        this.store(key, payload)
+        this.save(key, payload)
     }
 }

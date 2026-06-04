@@ -8,22 +8,22 @@
       import {Pet, User} from "../js/models";
 
       window.onload = () => {
-        // Services.Auth.signup(new User({
-        //   name: "Cadastro",
-        //   email: "email2@mail.com",
-        //   password: '213412',
-        //   cpf: '12345',
-        //   phoneNumber: '123456'
-        // }))
+        Services.Auth.signup(new User({
+          name: "Cadastro",
+          email: "email3@mail.com",
+          password: '213412',
+          cpf: '12345',
+          phoneNumber: '123456'
+        }))
 
-        Services.Auth.login("email2@mail.com", "213412")
-        //
-        // Repositories.PetRepository.save(new Pet({
-        //   name: 'Bartolomeu',
-        //   specie_id: '1',
-        //   age: 3,
-        //   color: 'rajado'
-        // }))
+        Services.Auth.login("email3@mail.com", "213412")
+
+        Repositories.PetRepository.save(new Pet({
+          name: 'Bartolomeu',
+          specie_id: '1',
+          age: 3,
+          color: 'rajado'
+        }))
 
       }
     </script>
