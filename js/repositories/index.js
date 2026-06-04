@@ -1,7 +1,4 @@
-import { ServiceRepository} from "./service-repository.js";
-import {SpeciesRepository} from "./specie-repository.js";
-import {PetRepository} from "./pet-repository.js";
-
-window.Repositories.Service = new ServiceRepository();
-window.Repositories.Specie = new SpeciesRepository();
-window.Repositories.Pet = new PetRepository();
+export { ServiceRepository} from "./service-repository.js";
+export {SpeciesRepository} from "./specie-repository.js";
+export {PetRepository} from "./pet-repository.js";
+export {UserRepository} from "./user-repository.js";

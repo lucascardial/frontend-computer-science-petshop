@@ -19,14 +19,21 @@ export class User {
     /** @property {string} password **/
     password;
 
+    /**
+     * @param {{ id: string, name: string, email: string, cpf: string, phoneNumber: string, password: string }} data
+     **/
     constructor(data) {
+        this.id = data.id;
+
+        if(!this.id) {
+            this.id = crypto.randomUUID();
+        }
+
         this.name = data.name;
         this.email = data.email;
         this.cpf = data.cpf;
         this.phoneNumber = data.phoneNumber;
         this.password = data.password;
-
-        this.id = crypto.randomUUID()
 
         if(! Helpers.isStringValida(data.password) || data.password.length < 4) {
             Swal.fire({

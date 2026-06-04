@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Teste</title>
+    <script type="module" src="./../js/index.js"></script>
+    <script type="module">
+      import {Pet, User} from "../js/models";
+
+      window.onload = () => {
+        // Services.Auth.signup(new User({
+        //   name: "Cadastro",
+        //   email: "email2@mail.com",
+        //   password: '213412',
+        //   cpf: '12345',
+        //   phoneNumber: '123456'
+        // }))
+
+        Services.Auth.login("email2@mail.com", "213412")
+        //
+        // Repositories.PetRepository.save(new Pet({
+        //   name: 'Bartolomeu',
+        //   specie_id: '1',
+        //   age: 3,
+        //   color: 'rajado'
+        // }))
+
+      }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

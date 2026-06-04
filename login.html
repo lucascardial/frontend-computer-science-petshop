@@ -1,41 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="js/index.js"></script>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
+  <link rel="stylesheet" href="./css/rainbow.css">
 </head>
 <body>
-    <form id="login-usuario-form">
-        <input type="email" name="email" placeholder="E-mail"/> <br><br>
-        <input type="password" name="password" placeholder="Senha"/> <br><br>
-        <input type="submit" value="Login"/>
-    </form>
-    <script>
-        function fazerLogin(event) {
-            event.preventDefault();
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
+<div class="rainbow"></div>
 
-            const form = event.target;
+<div class="h"></div>
+<div class="v"></div>
 
-            const userEmail = form.email.value;
-            const password = form.password.value;
+<div class="parent">
+  <form action="">
+    <div class="input-group">
+      <label for="email-input"></label>
+      <input type="text" id="email-input" />
 
-            const login = Repositories.User.login(userEmail, password);
-
-            alert( login ? 'Login Bem Sucedido!' : 'Email ou Senha inválido!');
-        }
-
-        window.onload = function () {
-            document.querySelector('#login-usuario-form').addEventListener('submit', fazerLogin);
-
-        }
-    </script>
+      <label for="password-input"></label>
+      <input type="text" id="password-input">
+    </div>
+  </form>
+</div>
 </body>
 </html>

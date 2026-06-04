@@ -1,25 +1,41 @@
-import { Pet } from '../models/index.js';
+import { Pet } from '../models';
+import {LocalStorageService, AuthenticationService} from '../services';
 
 export class PetRepository {
     localStoragePrefix = 'pets';
+    /**@param {LocalStorageService} localStorageService**/
+    localStorageService;
+     /**@param {AuthenticationService} authService **/
+    authService
 
     /**
-     * lista os pets cadastrados filtrando pelo id do proprietário
-     * @param {string} owner_id
+     *
+     * @param {LocalStorageService}  localStorgeService
+     * @param {AuthenticationService} authService
      */
-    listByOwner(owner_id)
-    {
-        /** @var {Pet[]} pets **/
-        const pets = DB.get(this.localStoragePrefix);
+    constructor(localStorgeService, authService) {
+        this.localStorageService = localStorgeService;
+        this.authService = authService;
+    }
 
-        return pets.filter(pet => pet.owner_id === owner_id);
+    list()
+    {
+        const user = this.authService.getAuthenticatedUser();
+
+        /** @var {Pet[]} pets **/
+        const pets = this.localStorageService.get(this.localStoragePrefix);
+
+        return pets.filter(pet => pet.owner_id === user.id);
     }
 
     /**
-     * @param {Pet} pet
+     * @param {Pet} dado
      * @return void
      */
-    store(pet){
-        DB.store(this.localStoragePrefix, pet);
+    save(dado){
+        const user = this.authService.getAuthenticatedUser();
+        dado.owner_id = user.id;
+
+        this.localStorageService.save(this.localStoragePrefix, dado);
     }
 }
