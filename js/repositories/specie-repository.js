@@ -9,6 +9,7 @@ export class SpeciesRepository {
             { id: '1', name: 'gato' },
             { id: '2', name: 'cachorro' },
             { id: '3', name: 'ave' },
+            { id: '4', name: 'peixe' },
         ]
     }
 
