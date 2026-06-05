@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script type="module" src="./js/index.js"></script>
+</head>
+<body>
+<dialog id="myDialog" class="dialog-form">
+    <form id="cadastro-pet-form" >
+        <h2>Novo Pet</h2>
+
+        <div class="input-group">
+            <label for="name-input">Nome</label>
+            <input id="name-input" type="text" name="nome" required />
+        </div>
+
+        <div class="input-group">
+            <label for="specie-option">Espécie</label>
+            <select id="specie-option" name="specie" required>
+                <option value="" disabled selected hidden>Selecione</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="age-input">Idade</label>
+            <input id="age-input" type="number" name="age" required />
+        </div>
+
+        <div class="input-group">
+            <label for="color-input">Cor</label>
+            <input id="color-input" type="text" name="color" required />
+        </div>
+
+        <div class="dialog-form-action">
+            <button class="btn btn-danger"  type="button" onclick="window.myDialog.close()">Cancelar</button>
+            <button class="btn" type="submit">Cadastrar</button>
+        </div>
+    </form>
+</dialog>
+<div class="dashboard-header">
+    <h1>Seus pets</h1>
+    <button class="btn" onclick="window.myDialog.showModal()">NOVO</button>
+</div>
+
+<div> <!-- precisa criar uma class aqui? -->
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Espécie</th>
+            <th>Idade</th>
+            <th>Cor</th>
+        </thead>
+
+        <tbody id="pets-table">
+
+        </tbody>
+    </table>
+</div>
+
+<script type="module">
+    import {Pet} from "./js/models";
+
+    function cadastroPet(event){
+        event.preventDefault();
+        const form = event.target;
+        const nome = form.nome.value;
+        const specie = form.specie.value;
+        const age = form.age.value;
+        const color = form.color.value;
+
+        Repositories.PetRepository.save(new Pet({
+            name: nome,
+            specie_id: specie,
+            age: age,
+            color: color,
+        }))
+        window.myDialog.close()
+        populatePetTable()
+    }
+    function populateSpecieOptions() {
+        Repositories.SpeciesRepository.list().forEach(function (specie) {
+            const newOption = document.createElement("option");
+            newOption.textContent = specie.name;
+            newOption.value = specie.id;
+            const selectHTMLElement = document.querySelector('#specie-option');
+            selectHTMLElement.append(newOption);
+            console.log(selectHTMLElement);
+        })
+    }
+    function populatePetTable(){
+        document.querySelector("#pets-table").innerHTML = '';
+        Repositories.PetRepository.list().forEach(function (pet) {
+            const specie = Repositories.SpeciesRepository.findById(pet.specie_id)
+            const tRow = document.createElement("tr");
+            const tdId = document.createElement("td")
+            const tdName = document.createElement("td");
+            const tdSpecie = document.createElement("td");
+            const tdAge = document.createElement("td");
+            const tdColor = document.createElement("td");
+            tdId.textContent = pet.id;
+            tdName.textContent = pet.name;
+            tdSpecie.textContent = specie.name;
+            tdAge.textContent = pet.age;
+            tdColor.textContent = pet.color;
+            tRow.appendChild(tdId);
+            tRow.appendChild(tdName);
+            tRow.appendChild(tdSpecie);
+            tRow.appendChild(tdAge);
+            tRow.appendChild(tdColor);
+            document.querySelector("#pets-table").appendChild(tRow);
+        })
+    }
+    window.onload = function(){
+         populateSpecieOptions();
+         populatePetTable();
+         document.querySelector('#cadastro-pet-form').addEventListener('submit', cadastroPet);
+    }
+</script>
+</body>
+</html>
