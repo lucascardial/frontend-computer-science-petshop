@@ -1,0 +1,170 @@
+.hidden {
+    display: none !important;
+}
+.app {
+    min-height: 100dvh;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+
+aside {
+    padding: 30px;
+    background: #f7f7f7;
+    border-radius: 15px;
+    overflow: hidden;
+    position: fixed;
+    width: 173px;
+}
+
+aside nav {
+    margin-top: 120px;
+}
+
+
+.nav-group {
+    display: grid;
+    margin-top: 20px;
+}
+
+.nav-group-title {
+    color: #94a3b8;
+    margin-bottom: 20px;
+}
+
+.nav-group-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-gap: 25px;
+    align-items: center;
+    padding-bottom: 5px;
+}
+
+.nav-group-item.current-link::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 10px);
+    left: -40px;
+    width: 20px;
+    height: 20px;
+    background: var(--color-primary);
+    transform: rotate(45deg);
+}
+
+.nav-group-item:hover > .nav-icon {
+    background: var(--color-primary);
+}
+
+main {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 250px;
+}
+
+.user-header-section {
+    height: 80px;
+    background: #f7f7f7;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    padding: 0 20px;
+}
+
+.main-content{
+    height: 100%;
+    background: #f7f7f7;
+    border-radius: 15px;
+    padding: 0 20px;
+}
+
+#user-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+#user-detail:hover > #user-session-actions {
+    display: block;
+}
+
+#user-detail-picture {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-primary);
+    border-radius: 50px;
+    color: #fff;
+}
+
+#user-header-detail-name {
+    color: var(--color-text)
+}
+
+#user-session-actions {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: -20px;
+    background-color: #f7f7f7;
+    padding: 10px;
+    width: 250px;
+    box-shadow: #00000052 0 0 24px;
+    min-height: 300px;
+}
+
+#user-session-actions::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #f7f7f7;
+    right: 46px;
+    top: -7px;
+    transform: rotate(45deg);
+}
+
+#user-session-actions::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    top: -18px;
+    left: 0;
+}
+
+
+
+#user-header-detail-email {
+    color: var(--color-muted);
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+.user-header-section p {
+    margin: 0;
+    padding: 0;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

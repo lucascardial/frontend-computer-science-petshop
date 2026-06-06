@@ -74,7 +74,7 @@ export class AuthenticationService {
      * @throws Error lança um erro caso não exista uma sessão de usuário
      */
     getAuthenticatedUser() {
-        const user = JSON.parse(sessionStorage.getItem('user_session'));
+        const user = JSON.parse(sessionStorage.getItem('user'));
 
         if(! user.id) {
             throw new Error('No user session found');

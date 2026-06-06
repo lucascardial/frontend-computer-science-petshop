@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="../css/icons.css">
     <script type="module" src="../js/index.js"></script>
     <style>
-
+        .hidden {
+            display: none !important;
+        }
         .app {
             min-height: 100dvh;
             display: flex;
@@ -29,8 +31,9 @@
             padding: 30px;
             background: #f7f7f7;
             flex: 1;
-            border-radius: 30px;
+            border-radius: 15px;
             overflow: hidden;
+            position: fixed;
         }
 
         aside nav {
@@ -74,8 +77,100 @@
 
         main {
             flex: 5;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-left: 250px;
+        }
+
+        .user-header-section {
+            height: 80px;
             background: #f7f7f7;
-            border-radius: 30px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: end;
+            padding: 0 20px;
+        }
+
+        .main-content{
+            height: 100%;
+            background: #f7f7f7;
+            border-radius: 15px;
+            padding: 0 20px;
+        }
+
+        #user-detail {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        #user-detail:hover > #user-session-actions {
+            display: block;
+        }
+
+        #user-detail-picture {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--color-primary);
+            border-radius: 50px;
+            color: #fff;
+        }
+
+        #user-header-detail-name {
+            color: var(--color-text)
+        }
+
+        #user-session-actions {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: -20px;
+            background-color: #f7f7f7;
+            padding: 10px;
+            width: 250px;
+            box-shadow: #00000052 0 0 24px;
+            min-height: 300px;
+        }
+
+        #user-session-actions::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #f7f7f7;
+            right: 46px;
+            top: -7px;
+            transform: rotate(45deg);
+        }
+
+        #user-session-actions::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            top: -18px;
+            left: 0;
+        }
+
+
+
+        #user-header-detail-email {
+            color: var(--color-muted);
+            font-weight: lighter;
+            font-size: 14px;
+        }
+
+        .user-header-section p {
+            margin: 0;
+            padding: 0;
         }
 
         .centered {
@@ -94,7 +189,7 @@
         <nav>
             <div class="nav-group">
                 <span class="nav-group-title">Geral</span>
-                <a href="#" class="nav-group-item">
+                <a href="#" class="nav-group-item current-link">
                     <div class="nav-icon icon-adjustments-horizontal"></div>
                     <span>Dashboard</span>
                 </a>
@@ -102,7 +197,7 @@
 
             <div class="nav-group">
                 <span class="nav-group-title">Pets</span>
-                <a href="#" class="nav-group-item current-link">
+                <a href="#" class="nav-group-item">
                     <div class="nav-icon icon-paw"></div>
                     <span>Meus Pets</span>
                 </a>
@@ -123,13 +218,38 @@
     </aside>
 
     <main>
-            <button onclick="Services.Auth.logout()">Sair</button>
+        <div class="user-header-section">
+            <div id="user-detail" class="hidden">
+                <div id="user-detail-picture">LC</div>
+                <span>
+                    <p id="user-header-detail-name"></p>
+                    <span id="user-header-detail-email"></span>
+                </span>
+                <div id="user-session-actions">
+                    <button onclick="Services.Auth.logout()">Sair</button>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+                <h1>Meus Pets</h1>
+        </div>
     </main>
 </div>
 <script>
     window.onload = () => {
         function redirectToLogin() {
             window.location.href = "./../pages/login.html";
+        }
+
+        function setUserSessionInfo() {
+            document.querySelector('#user-detail').classList.remove('hidden');
+            const user = Services.Auth.getAuthenticatedUser();
+
+            const nameInitials = user.name.split(' ');
+
+            document.querySelector('#user-detail-picture').textContent = `${nameInitials[0][0]}${nameInitials[1][0]}`;
+            document.querySelector('#user-header-detail-email').textContent = user.email;
+            document.querySelector('#user-header-detail-name').textContent = user.name;
         }
 
         function checkAuthStatus() {
@@ -139,6 +259,7 @@
         }
 
         checkAuthStatus();
+        setUserSessionInfo();
 
         window.addEventListener("userLoggedOut", redirectToLogin);
     }

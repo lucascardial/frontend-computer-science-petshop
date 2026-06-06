@@ -326,7 +326,7 @@
                     <input
                             class="form-input"
                             id="user-name-input"
-                            name="user_name"
+                            name="userName"
                             type="text"
                             autocomplete="email"
                     >
@@ -438,7 +438,7 @@
         event.preventDefault();
 
         const email = event.target.email.value;
-        const name = event.target.user_name.value;
+        const name = event.target.userName.value;
         const password = event.target.password.value.trim();
 
         const hasEmailError = !isValidEmail(email);
