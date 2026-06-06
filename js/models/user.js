@@ -7,12 +7,6 @@ export class User {
     /** @property {string} name*/
     name;
 
-    /** @property {string} name*/
-    cpf;
-
-    /** @property {string} name*/
-    phoneNumber;
-
     /** @property {string} email **/
     email;
 
@@ -20,7 +14,7 @@ export class User {
     password;
 
     /**
-     * @param {{ id: string, name: string, email: string, cpf: string, phoneNumber: string, password: string }} data
+     * @param {{ id: string, name: string, email: string, password: string }} data
      **/
     constructor(data) {
         this.id = data.id;
@@ -31,8 +25,6 @@ export class User {
 
         this.name = data.name;
         this.email = data.email;
-        this.cpf = data.cpf;
-        this.phoneNumber = data.phoneNumber;
         this.password = data.password;
 
         if(! Helpers.isStringValida(data.password) || data.password.length < 4) {

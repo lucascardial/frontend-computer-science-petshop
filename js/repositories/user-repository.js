@@ -29,6 +29,7 @@ export class UserRepository
      */
     save(user) {
         const emailExists = this.findByEmail(user.email);
+
         if(emailExists !== null) {
             alert('email em uso!')
             return;

@@ -1,0 +1,36 @@
+@import "./variables.css";
+
+.nav-icon {
+    width: 35px;
+    height: 35px;
+    background-color: var(--color-muted);
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.current-link .nav-icon {
+    background-color: var(--color-primary) !important;
+}
+
+.icon-adjustments-horizontal {
+    -webkit-mask: url(../icons/adjustments-horizontal.svg) no-repeat center;
+    mask: url(../icons/adjustments-horizontal.svg) no-repeat center;
+}
+
+.icon-store {
+    -webkit-mask: url(../icons/store.svg) no-repeat center;
+    mask: url(../icons/store.svg) no-repeat center;
+}
+
+.icon-paw {
+    -webkit-mask: url(../icons/dog-head.svg) no-repeat center;
+    mask: url(../icons/dog-head.svg) no-repeat center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}

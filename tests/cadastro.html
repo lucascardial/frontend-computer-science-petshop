@@ -3,27 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro Teste</title>
-    <script type="module" src="./../js/index.js"></script>
-    <script type="module">
+    <script type="module" crossorigin="anonymous" src="./../js/index.js"></script>
+    <script type="module" crossorigin="anonymous">
       import {Pet, User} from "../js/models";
 
       window.onload = () => {
         Services.Auth.signup(new User({
           name: "Cadastro",
-          email: "email3@mail.com",
+          email: "vinicius@mail.com",
           password: '213412',
           cpf: '12345',
           phoneNumber: '123456'
         }))
 
-        Services.Auth.login("email3@mail.com", "213412")
-
-        Repositories.PetRepository.save(new Pet({
-          name: 'Bartolomeu',
-          specie_id: '1',
-          age: 3,
-          color: 'rajado'
-        }))
+        Services.Auth.login("vinicius@mail.com", "213412")
 
       }
     </script>

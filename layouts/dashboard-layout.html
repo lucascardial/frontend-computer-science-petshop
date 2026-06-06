@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/input.css">
+    <link rel="stylesheet" href="../css/icons.css">
+    <script type="module" src="../js/index.js"></script>
+    <style>
+
+        .app {
+            min-height: 100dvh;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: inherit;
+        }
+
+        aside {
+            padding: 30px;
+            background: #f7f7f7;
+            flex: 1;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        aside nav {
+            margin-top: 120px;
+        }
+
+
+        .nav-group {
+            display: grid;
+            margin-top: 20px;
+        }
+
+        .nav-group-title {
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        .nav-group-item {
+            position: relative;
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            grid-gap: 25px;
+            align-items: center;
+            padding-bottom: 5px;
+        }
+
+        .nav-group-item.current-link::before {
+            content: '';
+            position: absolute;
+            top: calc(50% - 10px);
+            left: -40px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-primary);
+            transform: rotate(45deg);
+        }
+
+        .nav-group-item:hover > .nav-icon {
+            background: var(--color-primary);
+        }
+
+        main {
+            flex: 5;
+            background: #f7f7f7;
+            border-radius: 30px;
+        }
+
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <aside>
+        <div class="centered">
+            <img src="../images/pet-erson-orange-logo-horizontal.svg" alt="pet-erson-orange-logo" width="165px">
+        </div>
+        <nav>
+            <div class="nav-group">
+                <span class="nav-group-title">Geral</span>
+                <a href="#" class="nav-group-item">
+                    <div class="nav-icon icon-adjustments-horizontal"></div>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+
+            <div class="nav-group">
+                <span class="nav-group-title">Pets</span>
+                <a href="#" class="nav-group-item current-link">
+                    <div class="nav-icon icon-paw"></div>
+                    <span>Meus Pets</span>
+                </a>
+            </div>
+
+            <div class="nav-group">
+                <span class="nav-group-title">Atividades</span>
+                <a href="#" class="nav-group-item">
+                    <div class="nav-icon icon-store"></div>
+                    <span>Meus Pedidos</span>
+                </a>
+                <a href="#" class="nav-group-item">
+                    <div class="nav-icon icon-adjustments-horizontal"></div>
+                    <span>Meus Serviços</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <main>
+            <button onclick="Services.Auth.logout()">Sair</button>
+    </main>
+</div>
+<script>
+    window.onload = () => {
+        function redirectToLogin() {
+            window.location.href = "./../pages/login.html";
+        }
+
+        function checkAuthStatus() {
+            if(! Services.Auth.isAuthenticated()) {
+                redirectToLogin();
+            }
+        }
+
+        checkAuthStatus();
+
+        window.addEventListener("userLoggedOut", redirectToLogin);
+    }
+</script>
+</body>
+</html>

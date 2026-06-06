@@ -17,22 +17,41 @@ export class AuthenticationService {
     constructor(userRepository, localStorageService) {
         this.userRepository = userRepository;
         this.localStorageService = localStorageService;
+
+        const user =  localStorage.getItem('user_session');
+        if (user) {
+            sessionStorage.setItem('user',user);
+        }
     }
 
-    login(email, password) {
-        const user = this.userRepository.findByEmail(email);
+    login(email, password, remember = false) {
+        return new Promise((resolve, reject) => {
+            const user = this.userRepository.findByEmail(email);
 
-        if(user === null) {
-            return false;
-        }
+            if(user === null) {
+                reject(false);
+                return;
+            }
 
-        if(user.password !== password) {
-            return false;
-        }
+            if(user.password !== password) {
+                reject(false);
+                return;
+            }
 
-        localStorage.setItem('user_session', JSON.stringify(user));
+            sessionStorage.setItem('user', JSON.stringify(user));
 
-        return true;
+            if(remember) {
+                localStorage.setItem('user_session', JSON.stringify(user));
+            }
+
+            const loggedInEvent = new CustomEvent("userLoggedIn", {
+                detail: user
+            });
+
+            window.dispatchEvent(loggedInEvent);
+
+            resolve(true);
+        });
     }
 
     signup(User) {
@@ -40,7 +59,13 @@ export class AuthenticationService {
     }
 
     logout() {
-        this.localStorageService.remove('user_session');
+        localStorage.removeItem('user_session');
+        sessionStorage.clear();
+
+        const loggedOutEvent = new CustomEvent("userLoggedOut");
+
+        window.dispatchEvent(loggedOutEvent);
+
     }
 
     /**
@@ -49,13 +74,18 @@ export class AuthenticationService {
      * @throws Error lança um erro caso não exista uma sessão de usuário
      */
     getAuthenticatedUser() {
-        const user = this.localStorageService.get('user_session')
-        console.log(user)
+        const user = JSON.parse(sessionStorage.getItem('user_session'));
 
         if(! user.id) {
             throw new Error('No user session found');
         }
 
         return user;
+    }
+
+    isAuthenticated() {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+
+        return !!user?.id;
     }
 }

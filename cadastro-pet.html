@@ -44,7 +44,7 @@
     <button class="btn" onclick="window.myDialog.showModal()">NOVO</button>
 </div>
 
-<div> <!-- precisa criar uma class aqui? -->
+<div>
     <table>
         <thead>
             <th>ID</th>
@@ -54,9 +54,7 @@
             <th>Cor</th>
         </thead>
 
-        <tbody id="pets-table">
-
-        </tbody>
+        <tbody id="pets-table"></tbody>
     </table>
 </div>
 
@@ -90,8 +88,10 @@
             console.log(selectHTMLElement);
         })
     }
+
     function populatePetTable(){
         document.querySelector("#pets-table").innerHTML = '';
+
         Repositories.PetRepository.list().forEach(function (pet) {
             const specie = Repositories.SpeciesRepository.findById(pet.specie_id)
             const tRow = document.createElement("tr");
@@ -100,20 +100,30 @@
             const tdSpecie = document.createElement("td");
             const tdAge = document.createElement("td");
             const tdColor = document.createElement("td");
+
             tdId.textContent = pet.id;
             tdName.textContent = pet.name;
             tdSpecie.textContent = specie.name;
             tdAge.textContent = pet.age;
             tdColor.textContent = pet.color;
+
             tRow.appendChild(tdId);
             tRow.appendChild(tdName);
             tRow.appendChild(tdSpecie);
             tRow.appendChild(tdAge);
             tRow.appendChild(tdColor);
+
             document.querySelector("#pets-table").appendChild(tRow);
         })
     }
+
     window.onload = function(){
+
+        if(!Services.Auth.isAuthenticated()) {
+            window.location.href = "./pages/login.html";
+            return;
+        }
+
          populateSpecieOptions();
          populatePetTable();
          document.querySelector('#cadastro-pet-form').addEventListener('submit', cadastroPet);
