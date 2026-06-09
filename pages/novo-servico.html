@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/input.css">
+    <link rel="stylesheet" href="../css/icons.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <script type="module" src="../js/index.js"></script>
+    <script type="module" src="../js/dashboard.js"></script>
+    <style>
+        dialog {
+            width: 1000px;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <dialog id="new-service-dialog">
+        <div class="dialog-title">Solicitar Novo Serviço</div>
+        <div class="dialog-content">
+            <form action="#" id="new-pet-form" class="grid-row-gap-20">
+                <div class="grid-col-2 grid-gap-20">
+                    <div class="form-group">
+                        <label class="form-label" for="pet-option">Escolha o PET:</label>
+
+                        <select id="pet-option" class="form-input" name="pet_type" required>
+                            <option value="" disabled selected hidden>Selecione</option>
+                        </select>
+
+                        <span class="input-error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="service-option">Escolha o Serviço:</label>
+
+                        <select id="service-option" class="form-input" name="pet_type" required>
+                            <option value="" disabled selected hidden>Selecione</option>
+                        </select>
+
+                        <span class="input-error-message"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="dialog-actions">
+            <button class="secondary-button btn-danger" commandfor="new-service-dialog" command="close">Cancelar</button>
+            <button class="primary-button" form="new-pet-form">Cadastrar</button>
+        </div>
+    </dialog>
+
+    <aside>
+        <div class="centered">
+            <img src="../images/pet-erson-orange-logo-horizontal.svg" alt="pet-erson-orange-logo" width="165px">
+        </div>
+        <nav>
+
+        </nav>
+
+    </aside>
+
+    <main>
+        <div class="user-header-section">
+            <div id="user-detail" class="hidden">
+                <div id="user-detail-picture">LC</div>
+                <span>
+                    <p id="user-header-detail-name"></p>
+                    <span id="user-header-detail-email"></span>
+                </span>
+                <div id="user-session-actions">
+                    <button onclick="Services.Auth.logout()">Sair</button>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="main-content-header">
+                <h1 id="page-title"></h1>
+                <button class="primary-button" command="show-modal" commandfor="new-service-dialog">Solicitar novo</button>
+            </div>
+        </div>
+    </main>
+</div>
+<script>
+    window.onload = function() {
+        function populatePetOptions() {
+            Repositories.PetRepository.list().forEach(function (pet) {
+                const newOption = document.createElement("option");
+                newOption.textContent = pet.name;
+                newOption.value = pet.id;
+                const selectHTMLElement = document.querySelector('#pet-option');
+                selectHTMLElement.append(newOption);
+            })
+        }
+
+        function populateServiceOptions() {
+            Repositories.ServiceRepository.list().forEach(function (service) {
+                const price = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(
+                    service.price,
+                );
+                const newOption = document.createElement("option");
+                newOption.textContent = `${service.name} - ${price}`;
+                newOption.value = service.id;
+                const selectHTMLElement = document.querySelector('#service-option');
+                selectHTMLElement.append(newOption);
+            })
+        }
+
+        populatePetOptions();
+        populateServiceOptions();
+    }
+</script>
+</body>
+</html>

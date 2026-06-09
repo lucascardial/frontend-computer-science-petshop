@@ -106,22 +106,7 @@
     import {User} from "../js/models";
     import {Helpers} from "../js/helpers.js";
     import {resetFormErrors} from "../js/form.js";
-
-    const passwordToggle = document.querySelector("#passwordToggle");
-
-    /**
-     * @param {HTMLInputElement} input
-     * @param {string} message
-     * @return {void}
-     */
-    function registerFormError(input, message)
-    {
-        const inputGroup = input.closest('.form-group');
-
-        inputGroup.querySelector('.input-error-message').textContent = message;
-        inputGroup.classList.add('has-error');
-    }
-
+    import {registerFormError} from "../js/form.js";
 
     /**
      * @param {HTMLInputElement} email
@@ -156,18 +141,6 @@
         }
     }
 
-    // passwordToggle.addEventListener("click", () => {
-    //     const passwordInput = document.querySelector("#password-input");
-    //     const isPassword = passwordInput.type === "password";
-    //
-    //     passwordInput.type = isPassword ? "text" : "password";
-    //     passwordToggle.textContent = isPassword ? "Ocultar" : "Mostrar";
-    //     passwordToggle.setAttribute(
-    //         "aria-label",
-    //         isPassword ? "Ocultar senha" : "Mostrar senha"
-    //     );
-    // });
-
     function handleSignup(event) {
         event.preventDefault();
         const form = event.target;
@@ -201,6 +174,18 @@
 
     window.onload = function() {
         document.querySelector("#loginForm").addEventListener("submit", handleSignup);
+
+        document.querySelector("#passwordToggle").addEventListener("click", (event) => {
+            const passwordInput = document.querySelector("#password-input");
+            const isPassword = passwordInput.type === "password";
+
+            passwordInput.type = isPassword ? "text" : "password";
+            event.target.textContent = isPassword ? "Ocultar" : "Mostrar";
+            event.target.setAttribute(
+                "aria-label",
+                isPassword ? "Ocultar senha" : "Mostrar senha"
+            );
+        });
     }
 </script>
 </body>

@@ -22,17 +22,17 @@ import './listeners.js'
             ]
         },
         {
-            groupName: 'Atividades',
+            groupName: 'Serviços',
             links: [
                 {
-                    icon: 'icon-adjustments-horizontal',
-                    name: 'Serviços',
+                    icon: 'icon-store',
+                    name: 'Realizados',
                     href: '../pages/meus-servicos.html',
                 },
                 {
-                    icon: 'icon-store',
-                    name: 'Pedidos',
-                    href: '../pages/meus-pedidos.html',
+                    icon: 'icon-adjustments-horizontal',
+                    name: 'Novo Serviço',
+                    href: '../pages/novo-servico.html',
                 },
             ]
         }
