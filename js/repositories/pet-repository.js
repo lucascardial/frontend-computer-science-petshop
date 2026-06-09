@@ -1,5 +1,5 @@
-import { Pet } from '../models';
-import {LocalStorageService, AuthenticationService} from '../services';
+import { Pet } from '../models/index.js';
+import {LocalStorageService, AuthenticationService} from '../services/index.js';
 
 export class PetRepository {
     localStoragePrefix = 'pets';

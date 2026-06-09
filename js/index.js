@@ -1,3 +1,4 @@
+import './listeners.js'
 import {AuthenticationService, LocalStorageService} from './services/index.js'
 import {PetRepository, ServiceRepository, SpeciesRepository, UserRepository} from './repositories/index.js';
 
@@ -15,3 +16,4 @@ window.Services.Auth = authServiceInstance;
 window.Repositories.PetRepository = petRepositoryInstance;
 window.Repositories.ServiceRepository = serviceRepositoryInstance;
 window.Repositories.SpeciesRepository = specieRepositoryInstance;
+

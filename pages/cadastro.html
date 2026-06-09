@@ -3,303 +3,9 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Login</title>
-    <link rel="stylesheet" href="../css/input.css">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../css/auth.css">
     <script type="module" src="../js/index.js"></script>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-
-        }
-
-        .page {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .brand-panel {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 48px;
-            overflow: hidden;
-        }
-
-        .brand-content {
-            position: relative;
-            z-index: 1;
-            max-width: 460px;
-        }
-
-        .brand-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            border: 1px solid rgba(37, 99, 235, 0.16);
-            border-radius: 999px;
-            background: rgba(255, 255, 255);
-            color: var(--color-primary);
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-
-        .brand-badge-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: var(--color-primary);
-        }
-
-        .brand-title {
-            margin: 0;
-            font-size: clamp(36px, 5vw, 64px);
-            line-height: 1;
-            letter-spacing: -0.06em;
-            color: white;
-            text-shadow: 1px 1px 0px #000;
-        }
-
-        .brand-description {
-            margin: 24px 0 0;
-            max-width: 420px;
-            color: white;
-            font-size: 18px;
-            line-height: 1.7;
-            text-shadow: 1px 1px 0px #000;
-
-        }
-
-        .login-panel {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 32px;
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 440px;
-            padding: clamp(28px, 4vw, 48px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.86);
-            box-shadow: var(--shadow-card);
-            backdrop-filter: blur(14px);
-        }
-
-        .logo-area {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 32px;
-        }
-
-        .logo-box {
-            width: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px;
-        }
-
-        .logo-box img {
-            max-width: 100%;
-            max-height: 75px;
-            object-fit: contain;
-            display: block;
-        }
-
-        .logo-placeholder {
-            color: var(--color-placeholder);
-            font-size: 13px;
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .login-title {
-            margin: 0;
-            font-size: 28px;
-            line-height: 1.2;
-            letter-spacing: -0.04em;
-        }
-
-        .login-subtitle {
-            margin: 10px 0 0;
-            color: var(--color-muted);
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-
-        .password-input {
-            padding-right: 48px;
-        }
-
-        .password-toggle {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            border: 0;
-            background: transparent;
-            color: var(--color-muted);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .form-options {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            margin-top: 2px;
-        }
-
-        .checkbox-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--color-muted);
-            font-size: 14px;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .checkbox-label input {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--color-primary);
-        }
-
-        .link {
-            color: var(--color-primary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .link:hover {
-            text-decoration: underline;
-        }
-
-        .submit-button {
-            width: 100%;
-            height: 50px;
-            border: 0;
-            border-radius: var(--radius-md);
-            background: var(--color-primary);
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.24);
-        }
-
-        .submit-button:hover {
-            background: var(--color-primary-hover);
-            transform: translateY(-1px);
-        }
-
-        .submit-button:active {
-            transform: translateY(0);
-        }
-
-        .form-footer {
-            margin-top: 28px;
-            text-align: center;
-            color: var(--color-muted);
-            font-size: 14px;
-        }
-
-        .error-message {
-            display: none;
-            color: var(--color-error);
-            font-size: 13px;
-            margin-top: 6px;
-        }
-
-        .form-group.has-error .form-input {
-            border-color: var(--color-error);
-        }
-
-        .form-group.has-error .error-message {
-            display: block;
-        }
-
-        @media (max-width: 900px) {
-            .page {
-                grid-template-columns: 1fr;
-            }
-
-            .brand-panel {
-                display: none;
-            }
-
-            .login-panel {
-                min-height: 100vh;
-                padding: 24px;
-            }
-
-            .login-card {
-                max-width: 460px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .login-panel {
-                padding: 16px;
-            }
-
-            .login-card {
-                padding: 28px 20px;
-                border-radius: 20px;
-            }
-
-            .form-options {
-                align-items: flex-start;
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .login-title {
-                font-size: 24px;
-            }
-        }
-
-        .brand-panel {
-            background-image: url(../images/singup-background.png);
-            background-repeat: no-repeat;
-            background-size: cover;
-            /*background-position-x: -262px;*/
-        }
-    </style>
 </head>
 
 <body>
@@ -313,9 +19,9 @@
             </div>
 
             <header class="login-header">
-                <h2 class="login-title">Entrar na conta</h2>
+                <h2 class="login-title">Criar conta</h2>
                 <p class="login-subtitle">
-                    Informe seus dados de acesso para continuar.
+                    Informe seus dados de acesso para se cadastrar.
                 </p>
             </header>
 
@@ -330,9 +36,7 @@
                             type="text"
                     >
 
-                    <span class="error-message" id="user-name-input-error">
-                            Informe nome e sobrenome
-                    </span>
+                    <span class="input-error-message"></span>
                 </div>
                 <div class="form-group" id="emailGroup">
                     <label class="form-label" for="email">E-mail</label>
@@ -341,20 +45,17 @@
                             class="form-input"
                             id="email"
                             name="email"
-                            type="email"
                             placeholder="seu@email.com"
                             autocomplete="email"
                     >
 
-                    <span class="error-message" id="emailError">
-                            Informe um e-mail válido.
-                        </span>
+                    <span class="input-error-message"></span>
                 </div>
 
-                <div class="form-group" id="passwordGroup">
+                <div class="form-group secret-input">
                     <label class="form-label" for="password-input">Senha</label>
 
-                    <div class="input-wrapper">
+                    <div class="input-group">
                         <input
                                 class="form-input password-input"
                                 id="password-input"
@@ -374,12 +75,10 @@
                         </button>
                     </div>
 
-                    <span class="error-message" id="passwordError">
-                            Informe sua senha.
-                        </span>
+                    <span class="input-error-message"></span>
                 </div>
 
-                <button class="submit-button" type="submit">
+                <button class="primary-button" type="submit">
                     Cadastrar-me
                 </button>
             </form>
@@ -405,50 +104,91 @@
 
 <script type="module">
     import {User} from "../js/models";
+    import {Helpers} from "../js/helpers.js";
+    import {resetFormErrors} from "../js/form.js";
 
-    const emailGroup = document.querySelector("#emailGroup");
-    const passwordGroup = document.querySelector("#passwordGroup");
-    const nameGroup = document.querySelector("#nameGroup");
     const passwordToggle = document.querySelector("#passwordToggle");
 
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    /**
+     * @param {HTMLInputElement} input
+     * @param {string} message
+     * @return {void}
+     */
+    function registerFormError(input, message)
+    {
+        const inputGroup = input.closest('.form-group');
+
+        inputGroup.querySelector('.input-error-message').textContent = message;
+        inputGroup.classList.add('has-error');
     }
 
-    function setFieldError(group, hasError) {
-        group.classList.toggle("has-error", hasError);
+
+    /**
+     * @param {HTMLInputElement} email
+     * @return {boolean}
+     */
+    function validateEmail(email) {
+        if(!Helpers.isValidEmail(email.value)) {
+            registerFormError(email, 'Informe um e-mail válido!')
+        }
     }
 
-    passwordToggle.addEventListener("click", () => {
-        const passwordInput = document.querySelector("#password-input");
-        const isPassword = passwordInput.type === "password";
+    /**
+     * @param {HTMLInputElement} name
+     * @return {void}
+     */
+    function validadeName(name) {
+        const nameCount = name.value.trim().split(' ').length;
 
-        passwordInput.type = isPassword ? "text" : "password";
-        passwordToggle.textContent = isPassword ? "Ocultar" : "Mostrar";
-        passwordToggle.setAttribute(
-            "aria-label",
-            isPassword ? "Ocultar senha" : "Mostrar senha"
-        );
-    });
+        if(name.value.trim().length === 0) {
+            registerFormError(name, 'Campo obrigatório!')
+            return;
+        }
+
+        if(nameCount < 2) {
+            registerFormError(name, 'O sobrenome é obrigatório')
+        }
+    }
+
+    function validatePassword(password) {
+        if(password.value.trim().length < 6) {
+            registerFormError(password, 'A senha deve ter no mínimo 6 caractéres');
+        }
+    }
+
+    // passwordToggle.addEventListener("click", () => {
+    //     const passwordInput = document.querySelector("#password-input");
+    //     const isPassword = passwordInput.type === "password";
+    //
+    //     passwordInput.type = isPassword ? "text" : "password";
+    //     passwordToggle.textContent = isPassword ? "Ocultar" : "Mostrar";
+    //     passwordToggle.setAttribute(
+    //         "aria-label",
+    //         isPassword ? "Ocultar senha" : "Mostrar senha"
+    //     );
+    // });
 
     function handleSignup(event) {
         event.preventDefault();
+        const form = event.target;
+        const nameInput = form.userName;
+        const emailInput = form.email;
+        const passwordInput = form.password;
 
-        const email = event.target.email.value;
-        const name = event.target.userName.value;
-        const password = event.target.password.value.trim();
+        resetFormErrors(form);
 
-        const hasEmailError = !isValidEmail(email);
-        const hasPasswordError = password.length === 0;
-        const hasNameError = name.split(' ').length <2
+        validateEmail(emailInput);
+        validadeName(nameInput);
+        validatePassword(passwordInput);
 
-        setFieldError(emailGroup, hasEmailError);
-        setFieldError(passwordGroup, hasPasswordError);
-        setFieldError(nameGroup, hasNameError);
-
-        if (hasEmailError || hasPasswordError) {
+        if(form.querySelector('.form-group.has-error') !== null) {
             return;
         }
+
+        const email = form.email.value;
+        const name = form.userName.value;
+        const password = form.password.value.trim();
+
 
         Services.Auth.signup(new User({
             name: name,
@@ -456,7 +196,7 @@
             password: password
         }))
 
-        window.location.href = './login.html';
+        Services.Auth.login(email, password)
     }
 
     window.onload = function() {

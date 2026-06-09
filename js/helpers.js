@@ -3,10 +3,15 @@ function isStringValida(str) {
 }
 
 function isNullOrEmpty(obj) {
-    return obj === null || obj === undefined || !obj.count();
+    return obj === null || obj === undefined || obj.length;
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 export const Helpers = {
     isStringValida,
     isNullOrEmpty,
+    isValidEmail
 }

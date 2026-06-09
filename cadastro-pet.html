@@ -78,6 +78,7 @@
         window.myDialog.close()
         populatePetTable()
     }
+
     function populateSpecieOptions() {
         Repositories.SpeciesRepository.list().forEach(function (specie) {
             const newOption = document.createElement("option");

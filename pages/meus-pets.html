@@ -12,6 +12,68 @@
 </head>
 <body>
 <div class="app">
+
+    <dialog id="new-pet-dialog">
+        <div class="dialog-title">Cadastrar novo Pet</div>
+        <div class="dialog-content">
+            <form action="#" id="new-pet-form" class="grid-row-gap-20">
+                <div class="grid-col-2 grid-gap-20">
+                    <div class="form-group">
+                        <label class="form-label" for="pet-name-input">Nome do Pet</label>
+
+                        <input
+                                class="form-input"
+                                id="pet-name-input"
+                                name="pet_name"
+                                type="text"
+                        >
+
+                        <span class="input-error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pet-specie-option">Tipo:</label>
+
+                        <select id="pet-specie-option" class="form-input" name="pet_type" required>
+                            <option value="" disabled selected hidden>Selecione</option>
+                        </select>
+
+                        <span class="input-error-message"></span>
+                    </div>
+                </div>
+                <div class="grid-col-2 grid-gap-20">
+                    <div class="form-group">
+                        <label class="form-label" for="pet-color-input">Cor da Pelagem:</label>
+
+                        <input
+                                class="form-input"
+                                id="pet-color-input"
+                                name="pet_color"
+                                type="text"
+                        >
+
+                        <span class="input-error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pet-age-input">Idade:</label>
+
+                        <input
+                                class="form-input"
+                                id="pet-age-input"
+                                name="pet_age"
+                                type="text"
+                        >
+
+                        <span class="input-error-message"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="dialog-actions">
+            <button class="secondary-button btn-danger" commandfor="new-pet-dialog" command="close">Cancelar</button>
+            <button class="primary-button" form="new-pet-form">Cadastrar</button>
+        </div>
+    </dialog>
+
     <aside>
         <div class="centered">
             <img src="../images/pet-erson-orange-logo-horizontal.svg" alt="pet-erson-orange-logo" width="165px">
@@ -36,9 +98,95 @@
             </div>
         </div>
         <div class="main-content">
-            <h1 id="page-title"></h1>
+            <div class="main-content-header">
+                <h1 id="page-title"></h1>
+                <button class="primary-button" command="show-modal" commandfor="new-pet-dialog">Cadastrar novo</button>
+            </div>
+
+            <div>
+                <table>
+                    <thead>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Espécie</th>
+                    <th>Idade</th>
+                    <th>Cor</th>
+                    </thead>
+
+                    <tbody id="pets-table"></tbody>
+                </table>
+            </div>
         </div>
     </main>
 </div>
+<script type="module">
+    import {Pet} from "../js/models/index.js";
+
+    window.onload = function() {
+        function populateSpecieOptions() {
+            Repositories.SpeciesRepository.list().forEach(function (specie) {
+                const newOption = document.createElement("option");
+                newOption.textContent = specie.name;
+                newOption.value = specie.id;
+                const selectHTMLElement = document.querySelector('#pet-specie-option');
+                selectHTMLElement.append(newOption);
+                console.log(selectHTMLElement);
+            })
+        }
+
+        function populatePetTable(){
+            document.querySelector("#pets-table").innerHTML = '';
+
+            Repositories.PetRepository.list().forEach(function (pet) {
+                const specie = Repositories.SpeciesRepository.findById(pet.specie_id)
+                const tRow = document.createElement("tr");
+                const tdId = document.createElement("td")
+                const tdName = document.createElement("td");
+                const tdSpecie = document.createElement("td");
+                const tdAge = document.createElement("td");
+                const tdColor = document.createElement("td");
+
+                tdId.textContent = pet.id;
+                tdName.textContent = pet.name;
+                tdSpecie.textContent = specie.name;
+                tdAge.textContent = pet.age;
+                tdColor.textContent = pet.color;
+
+                tRow.appendChild(tdId);
+                tRow.appendChild(tdName);
+                tRow.appendChild(tdSpecie);
+                tRow.appendChild(tdAge);
+                tRow.appendChild(tdColor);
+
+                document.querySelector("#pets-table").appendChild(tRow);
+            })
+        }
+
+        function savePet(event) {
+            event.preventDefault();
+
+            const form = event.target;
+
+            const petName = form.pet_name.value;
+            const petType = form.pet_type.value;
+            const petAge = form.pet_age.value;
+            const petColor = form.pet_color.value;
+
+            Repositories.PetRepository.save(new Pet({
+                name: petName,
+                age: petAge,
+                color: petColor,
+                specie_id: petType
+            }))
+
+            document.querySelector('#new-pet-dialog').close();
+            populatePetTable();
+        }
+
+        document.querySelector('#new-pet-form').addEventListener('submit', savePet);
+        populateSpecieOptions();
+        populatePetTable();
+    }
+</script>
 </body>
 </html>

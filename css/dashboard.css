@@ -1,3 +1,5 @@
+@import "grid.css";
+
 .hidden {
     display: none !important;
 }
@@ -23,7 +25,7 @@ aside {
     border-radius: 15px;
     overflow: hidden;
     position: fixed;
-    width: 173px;
+    width: 225px;
 }
 
 aside nav {
@@ -166,5 +168,11 @@ main {
 .centered {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.main-content-header {
+    display: grid;
+    grid-template-columns: 1fr 150px;
     align-items: center;
 }

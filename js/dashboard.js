@@ -1,4 +1,5 @@
-window.onload = function(){
+import './listeners.js'
+
     const navLinks = [
         {
             groupName: 'Geral',
@@ -120,4 +121,3 @@ window.onload = function(){
     rendPageTitle();
 
     window.addEventListener("userLoggedOut", redirectToLogin);
-}
